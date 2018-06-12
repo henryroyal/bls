@@ -1,0 +1,5 @@
+click
+json-log-formatter
+requests
+sqlalchemy
+boto3
