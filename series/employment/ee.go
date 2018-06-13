@@ -1,6 +1,7 @@
 package employment
 
-// Employment & Unemployment
-type NationalEmploymentHoursAndEarningsSIC struct{
-	Dataset
+import "github.com/henryroyal/bls/series"
+
+type NationalEmploymentHoursAndEarningsSIC struct {
+	bls.Dataset
 }
