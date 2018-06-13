@@ -3,5 +3,15 @@ package employment
 import "github.com/henryroyal/bls/series"
 
 type OccupationalEmploymentStatistics struct {
-	bls.Dataset
+	series.Dataset
+}
+
+func NewOccupationalEmploymentStatistics() (*OccupationalEmploymentStatistics) {
+	return &OccupationalEmploymentStatistics{
+		series.Dataset{
+			Name:    "Occupational Employment Statistics (OES)",
+			Symbol:  "oe",
+			BaseURL: series.BaseURL,
+		},
+	}
 }

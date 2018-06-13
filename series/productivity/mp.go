@@ -3,5 +3,15 @@ package productivity
 import "github.com/henryroyal/bls/series"
 
 type MajorSectorMultifactorProductivity struct {
-	bls.Dataset
+	series.Dataset
+}
+
+func NewMajorSectorMultifactorProductivity() (*MajorSectorMultifactorProductivity) {
+	return &MajorSectorMultifactorProductivity{
+		series.Dataset{
+			Name:    "Major Sector Multifactor Productivity",
+			Symbol:  "mp",
+			BaseURL: series.BaseURL,
+		},
+	}
 }

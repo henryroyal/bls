@@ -2,7 +2,16 @@ package employment
 
 import "github.com/henryroyal/bls/series"
 
-// Employment & Unemployment
 type BusinessEmploymentDynamics struct {
-	bls.Dataset
+	series.Dataset
+}
+
+func NewBusinessEmploymentDynamics() (*BusinessEmploymentDynamics) {
+	return &BusinessEmploymentDynamics{
+		series.Dataset{
+			Name:    "Business Employment Dynamics",
+			Symbol:  "bd",
+			BaseURL: series.BaseURL,
+		},
+	}
 }
