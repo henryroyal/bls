@@ -2,10 +2,9 @@ package series
 
 import (
 	"fmt"
-	"path"
 )
 
-const BaseURL string = "https://download.bls.gov/pub/time.series/"
+const BaseURL string = `https://download.bls.gov/pub/time.series/`
 
 type DatasetFetcher interface {
 	DocumentationURL()
@@ -18,14 +17,14 @@ type Dataset struct {
 	BaseURL string
 }
 
+func (self *Dataset) DatasetURL() string {
+	return (self.BaseURL + self.Symbol)
+}
+
 func (self *Dataset) DocumentationURL() string {
-	return path.Join(BaseURL, self.Symbol, fmt.Sprintf("%v.txt", self.Symbol))
+	return (self.BaseURL + self.Symbol + fmt.Sprintf("%v.txt", self.Symbol))
 }
 
 func (self *Dataset) SeriesIndexURL() string {
-	return path.Join(BaseURL, self.Symbol, fmt.Sprintf("%v.series", self.Symbol))
-}
-
-func (self *Dataset) String() string {
-	return self.Name
+	return (self.BaseURL + self.Symbol + fmt.Sprintf("%v.series", self.Symbol))
 }
