@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"github.com/PuerkitoBio/goquery"
 	"path"
+	"regexp"
 )
 
 const BaseURL string = `https://download.bls.gov/pub/time.series/`
@@ -16,9 +17,11 @@ type DatasetDescriptor interface {
 }
 
 type Dataset struct {
-	Name    string
-	Symbol  string
-	BaseURL string
+	Name         string
+	Symbol       string
+	BaseURL      string
+	Schema       string
+	SeriesFormat regexp.Regexp
 }
 
 func (self *Dataset) getHTMLDocument(url string) (*goquery.Document, error) {
