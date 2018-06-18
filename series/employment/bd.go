@@ -24,7 +24,7 @@ import (
  */
 
 var (
-	seriesIdFormat *regexp.Regexp = regexp.MustCompile(
+	bdSeriesIdFormat *regexp.Regexp = regexp.MustCompile(
 		`(?P<p>\w{2})(?P<sac>\w{1})(?P<ac>\d{10})(?P<ic>\d{6})(?P<uac>\d{1})(?P<dec>\d{1})(?P<scc>\w{2})(?P<dcc>\w{2})(?P<rlc>\w{1})(?P<rtc>\w{1})(?P<oc>\w{1})`,
 	)
 )
@@ -39,7 +39,8 @@ func NewBusinessEmploymentDynamics() (*BusinessEmploymentDynamics) {
 			Name:         "Business Employment Dynamics",
 			Symbol:       "bd",
 			BaseURL:      series.BaseURL,
-			SeriesFormat: *seriesIdFormat,
+			SeriesFormat: *bdSeriesIdFormat,
+			Datafiles:    []string{"bd.data.1.AllItems"},
 			Schema: `
 				CREATE SCHEMA IF NOT EXISTS bd;
 				CREATE TABLE IF NOT EXISTS bd.county (
@@ -103,19 +104,19 @@ func NewBusinessEmploymentDynamics() (*BusinessEmploymentDynamics) {
 				CREATE TABLE IF NOT EXISTS bd.series (
 					series_id         char(28) PRIMARY KEY,
 					seasonal          char(1),
-					msa_code          smallint,
-					state_code        smallint,
-					county_code       smallint,
-					industry_code     int,
-					unitanalysis_code smallint,
-					dataelement_code  smallint,
-					sizeclass_code    smallint,
-					dataclass_code    char(2),
-					ratelevel_code    char(1),
-					periodicity_code  char(1),
-					ownership_code    smallint,
+					msa_code          smallint REFERENCES bd.msa          (msa_code),
+					state_code        smallint REFERENCES bd.state        (state_code),
+					county_code       smallint REFERENCES bd.county       (county_code),
+					industry_code     int      REFERENCES bd.industry     (industry_code),
+					unitanalysis_code smallint REFERENCES bd.unitanalysis (unitanalysis_code),
+					dataelement_code  smallint REFERENCES bd.dataelement  (dataelement_code),
+					sizeclass_code    smallint REFERENCES bd.sizeclass    (sizeclass_code),
+					dataclass_code    char(2)  REFERENCES bd.dataclass    (dataclass_code),
+					ratelevel_code    char(1)  REFERENCES bd.ratelevel    (ratelevel_code),
+					periodicity_code  char(1)  REFERENCES bd.periodicity  (periodicity_code),
+					ownership_code    smallint REFERENCES bd.ownership    (ownership_code),
 					series_title      text,
-					footnote_codes    smallint,
+					footnote_codes    smallint REFERENCES bd.footnote     (footnote_code),
 					begin_year        smallint,
 					begin_period      char(3),
 					end_year          smallint,
@@ -123,11 +124,11 @@ func NewBusinessEmploymentDynamics() (*BusinessEmploymentDynamics) {
 				);
 				CREATE TABLE IF NOT EXISTS bd.observations (
 					id             SERIAL PRIMARY KEY,
-					series_id      char(28) REFERENCES bd.series (series_id),
+					series_id      char(28) REFERENCES bd.series   (series_id),
 					year           int,
 					period         char(3),
 					value          int,
-					footnote_codes int
+					footnote_codes smallint REFERENCES bd.footnote (footnote_code)
 				);`,
 		},
 	}
