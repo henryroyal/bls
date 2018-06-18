@@ -21,6 +21,7 @@ type Dataset struct {
 	Symbol       string
 	BaseURL      string
 	Schema       string
+	Datafiles    []string
 	SeriesFormat regexp.Regexp
 }
 
