@@ -128,7 +128,8 @@ func NewBusinessEmploymentDynamics() (*BusinessEmploymentDynamics) {
 					year           int,
 					period         char(3),
 					value          int,
-					footnote_codes smallint REFERENCES bd.footnote (footnote_code)
+					footnote_codes smallint REFERENCES bd.footnote (footnote_code),
+					UNIQUE (series_id, year, period)
 				);`,
 		},
 	}

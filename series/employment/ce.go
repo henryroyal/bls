@@ -82,10 +82,11 @@ func NewNationalEmploymentHoursAndEarnings() (*NationalEmploymentHoursAndEarning
 				);
 				CREATE TABLE IF NOT EXISTS ce.observations (
   					series_id      char(13) REFERENCES ce.series (series_id),
-	  				year           int,
+					year           int,
 	  				period         char(3)  REFERENCES ce.period (period_code),
 	  				value          int,
-	  				footnote_codes char(1)  REFERENCES ce.footnote (footnote_code)
+					footnote_codes char(1)  REFERENCES ce.footnote (footnote_code),
+					UNIQUE (series_id, year, period)
 				);
 			`,
 		},
