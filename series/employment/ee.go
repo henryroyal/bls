@@ -138,7 +138,7 @@ func NewNationalEmploymentHoursAndEarningsSIC() (*NationalEmploymentHoursAndEarn
 					industry_name     varchar(250)
 				);
 				CREATE TABLE IF NOT EXISTS ee.period (
-					period      char(3) PRIMARY KEY,
+					period_code char(3) PRIMARY KEY,
 					period_abbr varchar(5),
 					period_name varchar(25)
 				);
@@ -155,7 +155,7 @@ func NewNationalEmploymentHoursAndEarningsSIC() (*NationalEmploymentHoursAndEarn
 				);
 				CREATE TABLE IF NOT EXISTS ee.observations (
 					id             SERIAL PRIMARY KEY,
-					series_id      char(11) PRIMARY KEY,
+					series_id      char(11),
 					year           int,
 					period         char(3) REFERENCES ee.period (period_code),
 					value          int,

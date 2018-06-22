@@ -1,15 +1,16 @@
 package series
 
 import (
-	"fmt"
-	"net/http"
-	"github.com/PuerkitoBio/goquery"
-	"path"
 	"regexp"
+	"github.com/PuerkitoBio/goquery"
+	"net/http"
+	"fmt"
+	"path"
 )
 
 const BaseURL string = `https://download.bls.gov/pub/time.series/`
 
+//TODO: way to map arbitrary 'ignore' offsets (pop off first two rows or ignore fifth column)
 type DatasetDescriptor interface {
 	String() string
 	DatasetURL() string
