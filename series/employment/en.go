@@ -2,6 +2,7 @@ package employment
 
 import "github.com/henryroyal/bls/series"
 
+// FIXME - this set is missing, figure out where it went or remove it
 type StateAndCountyEmploymentAndWagesQuarterly struct {
 	series.Dataset
 }

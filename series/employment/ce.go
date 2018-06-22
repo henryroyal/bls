@@ -14,7 +14,6 @@ import (
 	3               U               Seasonal Adjustment Code
 	4-11		08000000	Supersector and Industry Codes
 	12-13           03              Data Type Code
-
  */
 
 var (
@@ -87,8 +86,7 @@ func NewNationalEmploymentHoursAndEarnings() (*NationalEmploymentHoursAndEarning
 	  				value          int,
 					footnote_codes char(1)  REFERENCES ce.footnote (footnote_code),
 					UNIQUE (series_id, year, period)
-				);
-			`,
+				);`,
 		},
 	}
 }
