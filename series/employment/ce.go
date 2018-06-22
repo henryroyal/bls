@@ -79,7 +79,7 @@ func NewNationalEmploymentHoursAndEarnings() (*NationalEmploymentHoursAndEarning
 	  				end_year         int,
 	  				end_period       char(3)  REFERENCES ce.period (period_code)
 				);
-				CREATE TABLE IF NOT EXISTS ce.observations (
+				CREATE TABLE IF NOT EXISTS ce.observation (
   					series_id      char(13) REFERENCES ce.series (series_id),
 					year           int,
 	  				period         char(3)  REFERENCES ce.period (period_code),

@@ -122,7 +122,7 @@ func NewBusinessEmploymentDynamics() (*BusinessEmploymentDynamics) {
 					end_year          smallint,
 					end_period        char(3)
 				);
-				CREATE TABLE IF NOT EXISTS bd.observations (
+				CREATE TABLE IF NOT EXISTS bd.observation (
 					id             SERIAL PRIMARY KEY,
 					series_id      char(28) REFERENCES bd.series   (series_id),
 					year           int,

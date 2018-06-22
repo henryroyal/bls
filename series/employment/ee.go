@@ -153,7 +153,7 @@ func NewNationalEmploymentHoursAndEarningsSIC() (*NationalEmploymentHoursAndEarn
 					end_year       int,
 					end_period     char(3) REFERENCES ee.period (period_code)
 				);
-				CREATE TABLE IF NOT EXISTS ee.observations (
+				CREATE TABLE IF NOT EXISTS ee.observation (
 					id             SERIAL PRIMARY KEY,
 					series_id      char(11),
 					year           int,
